@@ -38,8 +38,23 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void DestroyEnemy(Enemy enemy)
+    /// <summary>
+    /// 적 삭제 처리
+    /// </summary>
+    /// <param name="enemy">삭제해야할 오브젝트</param>
+    /// <param name="gold">골도착이 아닌 경우 추가할 골드</param>
+    /// <param name="isArrivedGoal">골 도착 여부</param>
+    public void DestroyEnemy(Enemy enemy, int gold, bool isArrivedGoal)
     {
+        // 골에 도착한 것이냐
+        if (isArrivedGoal)
+        {
+            // todo 도착했다면 유저에게 데미지
+        }
+        else
+        {
+            // todo 아니면 골드 증가
+        }
         // 적리스트에서 지정한 적 지우기
         enemyList.Remove(enemy);
         // 적 오브젝트 삭제

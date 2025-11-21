@@ -15090,8 +15090,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b47bb0ee9f7504387c8a72429351cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 556517937436247117, guid: 7a239aab14dc919498b8cb8c65fa34b8, type: 3}
-  spawnTime: 0.5
+  enemyPrefab: {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
+  spawnTime: 3
   waypoints:
   - {fileID: 463248106}
   - {fileID: 1984774763}

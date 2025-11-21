@@ -14,6 +14,7 @@ public class TowerWeapon : MonoBehaviour
     [SerializeField] Transform spawnPoint; // 발사체 생성 위치
     [SerializeField] float attackRate = 0.5f; // 발사 간격
     [SerializeField] float attackRange = 2.0f; // 발사체 생성 범위
+    [SerializeField] float attackDamage = 1.0f; // 발사체 공격력
     WeaponState weaponState = WeaponState.SearchTarget; // 타워상태 저장 변수
     Transform attackTarget = null; // 공격 목표
 
@@ -111,6 +112,6 @@ public class TowerWeapon : MonoBehaviour
         GameObject clone = Instantiate(projectilePrefab,
             spawnPoint.position, Quaternion.identity, transform);
         // 발사체에 공격 목표 지정
-        clone.GetComponent<Projectile>().SetTarget(attackTarget);
+        clone.GetComponent<Projectile>().SetTarget(attackTarget, attackDamage);
     }
 }
