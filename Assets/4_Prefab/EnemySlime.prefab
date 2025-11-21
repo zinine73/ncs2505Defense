@@ -137,3 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  maxHP: 5
+  gold: 10

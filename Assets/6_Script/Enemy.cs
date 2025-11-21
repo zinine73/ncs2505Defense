@@ -99,7 +99,8 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            // todo 피격 애니메이션 실행
+            // 피격 애니메이션 실행
+            anim.SetTrigger("HIT");
         }
     }
 }
