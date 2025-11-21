@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 556517937436247121}
   - component: {fileID: 556517937436247118}
   - component: {fileID: 556517937436247119}
-  - component: {fileID: 556517937436247116}
   - component: {fileID: 7466532036611670923}
+  - component: {fileID: 556517937436247116}
   m_Layer: 0
   m_Name: EnemyPig
   m_TagString: ENEMY
@@ -108,19 +108,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &556517937436247116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556517937436247117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c312d58340a10429103d07d534a2c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
 --- !u!70 &7466532036611670923
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,3 +124,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0072628506, y: 0.049595907}
   m_Size: {x: 0.6949614, y: 0.59577054}
   m_Direction: 1
+--- !u!114 &556517937436247116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556517937436247117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c312d58340a10429103d07d534a2c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  maxHP: 5
+  gold: 10
