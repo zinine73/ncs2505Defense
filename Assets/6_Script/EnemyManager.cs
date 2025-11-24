@@ -53,11 +53,14 @@ public class EnemyManager : MonoBehaviour
         // 골에 도착한 것이냐
         if (isArrivedGoal)
         {
-            // todo 도착했다면 유저에게 데미지
+            // 도착했다면 유저에게 데미지
+            // todo 적의 공격력
+            PlayerManager.Instance.TakeDamage(1);
         }
         else
         {
-            // todo 아니면 골드 증가
+            // 아니면 골드 증가
+            PlayerManager.Instance.CurrentGold += gold;
         }
         // 적리스트에서 지정한 적 지우기
         enemyList.Remove(enemy);
