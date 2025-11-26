@@ -17,6 +17,14 @@ public class TowerWeapon : MonoBehaviour
     [SerializeField] float attackDamage = 1.0f; // 발사체 공격력
     WeaponState weaponState = WeaponState.SearchTarget; // 타워상태 저장 변수
     Transform attackTarget = null; // 공격 목표
+    int level = 0; // 타워 레벨
+
+    #region property
+    public int Level => level + 1;
+    public float Damage => attackDamage;
+    public float Rate => attackRate;
+    public float Range => attackRange;
+    #endregion
 
     public void Init()
     {
