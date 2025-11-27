@@ -6,13 +6,16 @@ using TMPro;
 
 public class InfoTower : MonoBehaviour
 {
-    [SerializeField] Image imageTower;
-    [SerializeField] TMP_Text textLevel;
-    [SerializeField] TMP_Text textDamage;
-    [SerializeField] TMP_Text textRate;
-    [SerializeField] TMP_Text textRange;
-    [SerializeField] TowerAttackRange towerAttackRange; // 공격 범위 나타내는 이미지
-    TowerWeapon currentTower;
+    [SerializeField] Image imageTower;      // 타워 이미지
+    [SerializeField] TMP_Text textLevel;    // 타워 레벨
+    [SerializeField] TMP_Text textDamage;   // 타워 공격력
+    [SerializeField] TMP_Text textRate;     // 공격 속도
+    [SerializeField] TMP_Text textRange;    // 공격 범위
+    [SerializeField] TowerAttackRange towerAttackRange; // 공격 범위 표시
+    [SerializeField] TMP_Text textBtnUpgrade; // 업그레이드 비용
+    [SerializeField] Button buttonUpgrade;  // 업그레이드 버튼
+    [SerializeField] ToastMessage toastMsg; // 토스트 메시지
+    TowerWeapon currentTower;               // 현재 타워
 
     void Start()
     {
@@ -49,9 +52,35 @@ public class InfoTower : MonoBehaviour
 
     void UpdateTowerData()
     {
+        // 타워 정보 표시
+        imageTower.sprite = currentTower.TowerSprite;
         textLevel.text = $"Level : {currentTower.Level}";
         textDamage.text = $"Damage : {currentTower.Damage}";
         textRate.text = $"Rate : {currentTower.Rate}";
         textRange.text = $"Range : {currentTower.Range}";
+        textBtnUpgrade.text = $"Up:{currentTower.CostUpgrade}";
+
+        // 더이상 업그레이드가 안되는 상황이면 버튼을 안 눌리게 처리
+        buttonUpgrade.interactable = 
+            currentTower.Level < currentTower.MaxLevel ? true : false;
+    }
+
+    public void OnClickTowerUpgrade()
+    {
+        // 업그레이드 성공이면
+        if (currentTower.Upgrade())
+        {
+            // 데이터 갱신하고
+            UpdateTowerData();
+            // 공격범위표시 갱신
+            towerAttackRange.OnAttackRange(
+                currentTower.transform.position,
+                currentTower.Range);
+        }
+        else
+        {
+            // 안된다고 메시지 표시
+            toastMsg.ShowToast(ToastType.Money);
+        }
     }
 }

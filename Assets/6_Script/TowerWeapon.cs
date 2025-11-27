@@ -10,24 +10,29 @@ public enum WeaponState // 타워 상태
 
 public class TowerWeapon : MonoBehaviour
 {
+    [SerializeField] TowerTemplate towerTemplate; // 타워정보
     [SerializeField] GameObject projectilePrefab; // 발사체 프리펩
     [SerializeField] Transform spawnPoint; // 발사체 생성 위치
-    [SerializeField] float attackRate = 0.5f; // 발사 간격
-    [SerializeField] float attackRange = 2.0f; // 발사체 생성 범위
-    [SerializeField] float attackDamage = 1.0f; // 발사체 공격력
     WeaponState weaponState = WeaponState.SearchTarget; // 타워상태 저장 변수
     Transform attackTarget = null; // 공격 목표
+    SpriteRenderer spriteRenderer; // 타워 이미지 변경용
     int level = 0; // 타워 레벨
 
     #region property
     public int Level => level + 1;
-    public float Damage => attackDamage;
-    public float Rate => attackRate;
-    public float Range => attackRange;
+    public int MaxLevel => towerTemplate.weapon.Length;
+    public Sprite TowerSprite => towerTemplate.weapon[level].sprite;
+    public float Damage => towerTemplate.weapon[level].damage;
+    public float Rate => towerTemplate.weapon[level].rate;
+    public float Range => towerTemplate.weapon[level].range;
+    public int CostUpgrade => Level < MaxLevel ? 
+        towerTemplate.weapon[level + 1].cost: 0; 
     #endregion
 
     public void Init()
     {
+        // 이미지 변경용 랜더러 연결
+        spriteRenderer = GetComponent<SpriteRenderer>();
         // 적 찾기 상태로 초기화
         ChangeState(WeaponState.SearchTarget);
     }
@@ -65,7 +70,8 @@ public class TowerWeapon : MonoBehaviour
                 float distance = Vector3.Distance(item.transform.position, 
                     transform.position);
                 // 공격 사정거리 안에 있으면서 가장 긴 거리보다 작으면
-                if ((distance <= attackRange) && (distance <= closestDistance))
+                if ((distance <= towerTemplate.weapon[level].range) 
+                    && (distance <= closestDistance))
                 {
                     // 현재 거리를 최단 거리로 지정
                     closestDistance = distance;
@@ -99,7 +105,7 @@ public class TowerWeapon : MonoBehaviour
             float distance = Vector3.Distance(attackTarget.position,
                 transform.position);
             // 거리가 공격범위를 벗어나면
-            if (distance > attackRange)
+            if (distance > towerTemplate.weapon[level].range)
             {
                 // 공격목표를 없애고
                 attackTarget = null;
@@ -109,7 +115,7 @@ public class TowerWeapon : MonoBehaviour
                 break;
             }
             // 발사간격만큼 기다린 후 다시 공격
-            yield return new WaitForSeconds(attackRate);
+            yield return new WaitForSeconds(towerTemplate.weapon[level].rate);
             // 발사체 생성
             SpawnProjectile();
         }
@@ -120,6 +126,28 @@ public class TowerWeapon : MonoBehaviour
         GameObject clone = Instantiate(projectilePrefab,
             spawnPoint.position, Quaternion.identity, transform);
         // 발사체에 공격 목표 지정
-        clone.GetComponent<Projectile>().SetTarget(attackTarget, attackDamage);
+        clone.GetComponent<Projectile>().SetTarget(attackTarget, 
+            towerTemplate.weapon[level].damage);
+    }
+
+    public bool Upgrade()
+    {
+        // 가진 돈이 (현재 레벨보다 1큰)비용보다 적은지 검사
+        if (PlayerManager.Instance.CurrentGold <
+            towerTemplate.weapon[level + 1].cost)
+        {
+            // 실패 리턴
+            return false;
+        }
+
+        // 레벨 올리고
+        level++;
+        // 스프라이트 이미지도 바꾸고
+        spriteRenderer.sprite = towerTemplate.weapon[level].sprite;
+        // 골드에서 건설비용 차감하고
+        PlayerManager.Instance.CurrentGold -= 
+            towerTemplate.weapon[level].cost;
+        // 성공 리턴
+        return true;
     }
 }
