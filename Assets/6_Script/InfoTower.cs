@@ -14,6 +14,8 @@ public class InfoTower : MonoBehaviour
     [SerializeField] TowerAttackRange towerAttackRange; // 공격 범위 표시
     [SerializeField] TMP_Text textBtnUpgrade; // 업그레이드 비용
     [SerializeField] Button buttonUpgrade;  // 업그레이드 버튼
+    [SerializeField] TMP_Text textBtnSell; // 판매 비용
+    [SerializeField] Button buttonSell; // 판매 버튼
     [SerializeField] ToastMessage toastMsg; // 토스트 메시지
     TowerWeapon currentTower;               // 현재 타워
 
@@ -58,7 +60,8 @@ public class InfoTower : MonoBehaviour
         textDamage.text = $"Damage : {currentTower.Damage}";
         textRate.text = $"Rate : {currentTower.Rate}";
         textRange.text = $"Range : {currentTower.Range}";
-        textBtnUpgrade.text = $"Up:{currentTower.CostUpgrade}";
+        textBtnUpgrade.text = $"Upgrade:\n{currentTower.CostUpgrade}";
+        textBtnSell.text = $"Sell:\n{currentTower.CostSell}";
 
         // 더이상 업그레이드가 안되는 상황이면 버튼을 안 눌리게 처리
         buttonUpgrade.interactable = 
@@ -80,7 +83,13 @@ public class InfoTower : MonoBehaviour
         else
         {
             // 안된다고 메시지 표시
-            toastMsg.ShowToast(ToastType.Money);
+            toastMsg.ShowToast(ToastType.MoneyUpgrade);
         }
+    }
+
+    public void OnClickTowerSell()
+    {
+        currentTower.Sell();
+        OffPanel();
     }
 }

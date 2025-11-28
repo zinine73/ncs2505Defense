@@ -3434,7 +3434,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.000039, y: -39.358}
+  m_AnchoredPosition: {x: 4.000039, y: -30.44199}
   m_SizeDelta: {x: 151.4385, y: 33.642}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &636430442
@@ -6185,6 +6185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerTemplate: {fileID: 11400000, guid: db25fdad368ea5149869c32b534aa21d, type: 2}
   infoTower: {fileID: 1531223453}
+  toastMsg: {fileID: 716165702}
 --- !u!4 &1120084940
 Transform:
   m_ObjectHideFlags: 0
@@ -6235,7 +6236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: -73}
+  m_AnchoredPosition: {x: 4, y: -64.083984}
   m_SizeDelta: {x: 151.4385, y: 33.642}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1133529160
@@ -6676,7 +6677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.000039, y: 27.926012}
+  m_AnchoredPosition: {x: 4.000039, y: 36.842026}
   m_SizeDelta: {x: 151.4385, y: 33.642}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1185414041
@@ -8161,8 +8162,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.9728012, y: -32.4912}
-  m_SizeDelta: {x: -23.632, y: -328.6099}
+  m_AnchoredPosition: {x: -1.9728012, y: -21.674}
+  m_SizeDelta: {x: -23.632, y: -306.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1531223453
 MonoBehaviour:
@@ -8184,6 +8185,8 @@ MonoBehaviour:
   towerAttackRange: {fileID: 1658748720}
   textBtnUpgrade: {fileID: 733776461}
   buttonUpgrade: {fileID: 1763228595}
+  textBtnSell: {fileID: 1052941322}
+  buttonSell: {fileID: 1649445183}
   toastMsg: {fileID: 716165702}
 --- !u!114 &1531223454
 MonoBehaviour:
@@ -8951,8 +8954,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 48, y: -111.82418}
-  m_SizeDelta: {x: 51.991, y: 39.7824}
+  m_AnchoredPosition: {x: 50.862, y: -106.31}
+  m_SizeDelta: {x: 57.715, y: 50.809}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1649445183
 MonoBehaviour:
@@ -8997,7 +9000,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1649445184}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1531223453}
+        m_TargetAssemblyTypeName: InfoTower, Assembly-CSharp
+        m_MethodName: OnClickTowerSell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1649445184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9742,8 +9757,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -30, y: -111.82}
-  m_SizeDelta: {x: 92.5431, y: 39.782}
+  m_AnchoredPosition: {x: -31.7484, y: -106.31}
+  m_SizeDelta: {x: 89.0463, y: 50.809}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1763228595
 MonoBehaviour:
@@ -9941,7 +9956,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.000039, y: -5.715992}
+  m_AnchoredPosition: {x: 4.000039, y: 3.2}
   m_SizeDelta: {x: 151.4385, y: 33.642}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1791885390

@@ -26,7 +26,9 @@ public class TowerWeapon : MonoBehaviour
     public float Rate => towerTemplate.weapon[level].rate;
     public float Range => towerTemplate.weapon[level].range;
     public int CostUpgrade => Level < MaxLevel ? 
-        towerTemplate.weapon[level + 1].cost: 0; 
+        towerTemplate.weapon[level + 1].cost: 0;
+    public int CostSell => towerTemplate.weapon[level].sell;
+     
     #endregion
 
     public void Init()
@@ -149,5 +151,14 @@ public class TowerWeapon : MonoBehaviour
             towerTemplate.weapon[level].cost;
         // 성공 리턴
         return true;
+    }
+
+    public void Sell()
+    {
+        // 판매 비용 추가하고
+        PlayerManager.Instance.CurrentGold += 
+            towerTemplate.weapon[level].sell;
+        // 타워 오브젝트 지우기
+        Destroy(gameObject);
     }
 }

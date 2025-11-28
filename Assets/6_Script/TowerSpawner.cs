@@ -7,6 +7,7 @@ public class TowerSpawner : MonoBehaviour
 {
     [SerializeField] TowerTemplate towerTemplate; // 타워 정보
     [SerializeField] InfoTower infoTower; // 타워 정보 패널
+    [SerializeField] ToastMessage toastMsg; // 토스트 메시지
 
     ContactFilter2D filter; // Raycast용 파라미터
     List<RaycastHit2D> rcList; // Raycast 결과 저장용 리스트
@@ -76,7 +77,8 @@ public class TowerSpawner : MonoBehaviour
         // 건설비용이 소지골드보다 크면 리턴
         if (towerTemplate.weapon[0].cost > PlayerManager.Instance.CurrentGold)
         {
-            // todo 건설불가 메시지 출력
+            // 건설불가 메시지 출력
+            toastMsg.ShowToast(ToastType.MoneyBuild);
             return;
         }
         // 소지골드에서 건설비용 차감

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public enum ToastType // 메시지 종류 설정
 {
-    Money,  // 골드 모자랄 때
-    Build   // 건설 불가능 할 때
+    MoneyBuild,  // 건설 골드 모자랄 때
+    MoneyUpgrade // 업그레이드 골드 모자랄 때
 }
 
 public class ToastMessage : MonoBehaviour
@@ -22,11 +22,11 @@ public class ToastMessage : MonoBehaviour
     {
         switch (type)
         {
-            case ToastType.Money:
-                toastMsg.text = "Not enough money";
+            case ToastType.MoneyBuild:
+                toastMsg.text = "Not enough money for build";
                 break;
-            case ToastType.Build:
-                toastMsg.text = "Invalid build tower";
+            case ToastType.MoneyUpgrade:
+                toastMsg.text = "Not enough money for upgrade";
                 break;
         }
         tmpAlpha.FadeOut();
