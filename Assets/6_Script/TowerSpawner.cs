@@ -11,6 +11,8 @@ public class TowerSpawner : MonoBehaviour
 
     ContactFilter2D filter; // Raycast용 파라미터
     List<RaycastHit2D> rcList; // Raycast 결과 저장용 리스트
+    bool isOnTowerButton = false; // 타워건설버튼 눌렸는지 체크
+    GameObject followTowerClone = null; // 임시 타워
 
     void Start()
     {
@@ -74,13 +76,10 @@ public class TowerSpawner : MonoBehaviour
     }
     void SpawnTower(Transform tileTr)
     {
-        // 건설비용이 소지골드보다 크면 리턴
-        if (towerTemplate.weapon[0].cost > PlayerManager.Instance.CurrentGold)
-        {
-            // 건설불가 메시지 출력
-            toastMsg.ShowToast(ToastType.MoneyBuild);
-            return;
-        }
+        // 타워건설버튼을 눌렀을 때만 건설 가능
+        if (isOnTowerButton == false) return;
+        // 다시 건설버튼을 눌러서 건설하도록 설정
+        isOnTowerButton = false;
         // 소지골드에서 건설비용 차감
         PlayerManager.Instance.CurrentGold -= towerTemplate.weapon[0].cost;
         // 타워프리펩으로 타워 생성
@@ -88,5 +87,46 @@ public class TowerSpawner : MonoBehaviour
             tileTr.position, Quaternion.identity, transform);
         // 타워 무기 초기화
         clone.GetComponent<TowerWeapon>().Init();
+        // 임시 타워 삭제
+        Destroy(followTowerClone);
+        // 타워컨설 취소하는 코루틴 중지
+        StopCoroutine(OnTowerCancelSystem());
+    }
+
+    public void ReadyToSpawnTower()
+    {
+        // 버튼 중복해서 누르는 경우 방지
+        if (isOnTowerButton) return;
+
+        // 건설비용이 소지골드보다 크면 리턴
+        if (towerTemplate.weapon[0].cost > PlayerManager.Instance.CurrentGold)
+        {
+            // 건설불가 메시지 출력
+            toastMsg.ShowToast(ToastType.MoneyBuild);
+            return;
+        }
+
+        // 타워건설 버튼 눌렸다고 설정
+        isOnTowerButton = true;
+        // 마우스를 따라다니는 임시 타워 생성
+        followTowerClone = Instantiate(towerTemplate.followTowerPrefab);
+        // 타워건설 취소하는 코루틴 시작
+        StartCoroutine(OnTowerCancelSystem());
+    }
+
+    IEnumerator OnTowerCancelSystem()
+    {
+        while (true)
+        {
+            // esc 또는 마우스 우클릭하면 타워건설 취소
+            if (Input.GetKeyDown(KeyCode.Escape) ||
+                Input.GetMouseButtonDown(1))
+            {
+                isOnTowerButton = false;
+                Destroy(followTowerClone);
+                break;
+            }   
+            yield return null;
+        }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class TowerTemplate : ScriptableObject // 스크립터블 오브젝트
 {
     public GameObject towerPrefab; // 타워생성을 위한 프리펩
+    public GameObject followTowerPrefab; // 임시 타워 프리펩
     public Weapon[] weapon; // 레벨별 타워(무기) 정보
 
     [System.Serializable] // 직렬화
