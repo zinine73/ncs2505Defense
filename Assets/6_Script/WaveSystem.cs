@@ -6,11 +6,14 @@ using UnityEngine;
 [System.Serializable]
 public struct Wave
 {
+    [Tooltip("고정일 경우 적최대수와 prefab수를 맞춰줘야함")]
+    public bool             isStatic;       // 고정인지 아닌지
     [Tooltip("적 생성 주기 : 작을수록 빨리 생성됨")]
     public float            spawnTime;      // 적 생성 주기
     [Tooltip("적 최대 수 : 이번 웨이브에 나오는 적의 수")]
     public int              maxEnemyCount;  // 적 최대 숫자
-    public GameObject[]     enemyPrefabs;   // 적 종류    
+    public GameObject[]     enemyPrefabs;   // 적 종류 
+    public float[]          spawnTimeStatic; // 고정일때 적 생성 주기   
 }
 
 public class WaveSystem : MonoBehaviour

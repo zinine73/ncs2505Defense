@@ -15429,28 +15429,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - spawnTime: 1
-    maxEnemyCount: 15
+  - isStatic: 1
+    spawnTime: 1
+    maxEnemyCount: 5
     enemyPrefabs:
     - {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
+    - {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
+    - {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
     - {fileID: 556517937436247117, guid: 7a239aab14dc919498b8cb8c65fa34b8, type: 3}
-  - spawnTime: 0.7
+    - {fileID: 556517937436247117, guid: 7a239aab14dc919498b8cb8c65fa34b8, type: 3}
+    spawnTimeStatic:
+    - 0.5
+    - 0.5
+    - 2
+    - 1
+    - 0
+  - isStatic: 0
+    spawnTime: 0.7
     maxEnemyCount: 20
     enemyPrefabs:
     - {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
     - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
-  - spawnTime: 0.5
-    maxEnemyCount: 30
+    spawnTimeStatic: []
+  - isStatic: 1
+    spawnTime: 0.5
+    maxEnemyCount: 10
     enemyPrefabs:
     - {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
     - {fileID: 556517937436247117, guid: 7a239aab14dc919498b8cb8c65fa34b8, type: 3}
     - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
-  - spawnTime: 1
+    - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
+    - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
+    - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
+    - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
+    - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
+    - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
+    - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
+    spawnTimeStatic:
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+  - isStatic: 0
+    spawnTime: 1
     maxEnemyCount: 30
     enemyPrefabs:
     - {fileID: 1364744778495335728, guid: 5eec9ce9e9923c44a903a4addf6fb81f, type: 3}
     - {fileID: 556517937436247117, guid: 7a239aab14dc919498b8cb8c65fa34b8, type: 3}
     - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
+    spawnTimeStatic: []
 --- !u!4 &2040692660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6994064964682035600, guid: 1dcde1334efc2084d85cf27a347fa162, type: 3}

@@ -45,8 +45,18 @@ public class EnemyManager : MonoBehaviour
         // 웨이브 정보에 있는 최대 생성 숫자에 도달할 때까지
         while (spawnEnemyCount < currentWave.maxEnemyCount)
         {
-            // 웨이브 정보에 있는 적 종류 중 랜덤으로 생성
-            int enemyIndex = Random.Range(0, currentWave.enemyPrefabs.Length);
+            int enemyIndex;
+            if (currentWave.isStatic &&
+                currentWave.maxEnemyCount == currentWave.enemyPrefabs.Length)
+            {
+                // 고정인 경우 카운트가 곧 인덱스
+                enemyIndex = spawnEnemyCount;    
+            }
+            else
+            {
+                // 웨이브 정보에 있는 적 종류 중 랜덤으로 생성
+                enemyIndex = Random.Range(0, currentWave.enemyPrefabs.Length);
+            }
             // 적 프레팝으로 오브젝트를 생성하고 Enemy 스크립트 연결
             Enemy enemy = Instantiate(currentWave.enemyPrefabs[enemyIndex], 
                 transform).GetComponent<Enemy>();
@@ -59,7 +69,17 @@ public class EnemyManager : MonoBehaviour
             // 생성한 적 숫자 증가
             spawnEnemyCount++;
             // 생성 시간 기다렸다가 다음 적 생성
-            yield return new WaitForSeconds(currentWave.spawnTime);
+            float waitTime;
+            if (currentWave.isStatic &&
+                currentWave.maxEnemyCount == currentWave.spawnTimeStatic.Length)
+            {
+                waitTime = currentWave.spawnTimeStatic[enemyIndex];
+            }
+            else
+            {
+                waitTime = currentWave.spawnTime;
+            }
+            yield return new WaitForSeconds(waitTime);
         }
     }
 
