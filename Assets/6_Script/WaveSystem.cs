@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 // 유니티에디터에서 사용하거나 파일로 저장하기 위해서 시리얼라이즈
@@ -16,8 +17,15 @@ public struct Wave
     public float[]          spawnTimeStatic; // 고정일때 적 생성 주기   
 }
 
+// JSon 사용을 위한 wrapper class
+public class WaveWrapper
+{
+    public Wave[] waveArray;    
+}
+
 public class WaveSystem : MonoBehaviour
 {
+    const string FILE_NAME = "waves.json";
     [SerializeField] Wave[] waves; // 웨이브 배열
     int currentWaveIndex = -1; // 현재 웨이브 인덱스 (0에서 시작해야해서 초기값은 -1)
 
@@ -44,5 +52,28 @@ public class WaveSystem : MonoBehaviour
     public string GetWaveInfoString()
     {
         return $"{currentWaveIndex + 1}\n--\n{waves.Length}";
+    }
+
+    // 에디터 상단 메뉴가 아닌 WaveSystem이 붙어있는 컴퍼넌트에서 메뉴가 열린다
+    [ContextMenu("DefenseTower/Make Json data", false, 1)]
+    public void MakeJsonData()
+    {
+        // 저장 데이터가 배열인 경우 wrapper class로 한번 감싸주자
+        WaveWrapper data = new WaveWrapper();
+        data.waveArray = waves;
+        string jsonData = JsonUtility.ToJson(data, true);
+        string path = Path.Combine(Application.dataPath, FILE_NAME);
+        File.WriteAllText(path, jsonData);
+        Debug.Log("Make Json data is done.");
+    }
+
+    [ContextMenu("DefenseTower/Load from Json", false, 2)]
+    public void LoasFromJson()
+    {
+        string path = Path.Combine(Application.dataPath, FILE_NAME);
+        string jsonData = File.ReadAllText(path);
+        var json = JsonUtility.FromJson<WaveWrapper>(jsonData);
+        waves = json.waveArray;
+        Debug.Log("Loaded Json data from file.");
     }
 }
