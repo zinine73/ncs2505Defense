@@ -4,6 +4,7 @@
             "isStatic": true,
             "spawnTime": 1.0,
             "maxEnemyCount": 5,
+            "angryMode": 1,
             "enemyPrefabs": [
                 {
                     "instanceID": 24994
@@ -33,6 +34,7 @@
             "isStatic": false,
             "spawnTime": 0.699999988079071,
             "maxEnemyCount": 20,
+            "angryMode": 4,
             "enemyPrefabs": [
                 {
                     "instanceID": 24994
@@ -47,6 +49,7 @@
             "isStatic": true,
             "spawnTime": 0.5,
             "maxEnemyCount": 10,
+            "angryMode": 3,
             "enemyPrefabs": [
                 {
                     "instanceID": 24994
@@ -80,22 +83,23 @@
                 }
             ],
             "spawnTimeStatic": [
-                0.3,
-                0.3,
-                0.3,
-                0.3,
-                0.3,
-                0.3,
-                0.3,
-                0.3,
-                0.3,
-                0.3
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
             ]
         },
         {
             "isStatic": false,
             "spawnTime": 1.0,
             "maxEnemyCount": 30,
+            "angryMode": 5,
             "enemyPrefabs": [
                 {
                     "instanceID": 25000

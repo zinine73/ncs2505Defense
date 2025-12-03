@@ -13,6 +13,8 @@ public struct Wave
     public float            spawnTime;      // 적 생성 주기
     [Tooltip("적 최대 수 : 이번 웨이브에 나오는 적의 수")]
     public int              maxEnemyCount;  // 적 최대 숫자
+    [Tooltip("지정한 적 수가 되면 앵그리모드 발동")]
+    public int              angryMode;      // 앵그리모드 발생 시기
     public GameObject[]     enemyPrefabs;   // 적 종류 
     public float[]          spawnTimeStatic; // 고정일때 적 생성 주기   
 }

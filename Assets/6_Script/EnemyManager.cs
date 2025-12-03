@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     Wave currentWave; // 현재 웨이브 정보
     int currentEnemyCount; // 현재 남은 적 수
     List<Enemy> enemyList; // 생성된 적 리스트
+    bool isAngryMode;       // 앵그리모드 발동 여부
 
     public Transform[] Waypoints => waypoints; // 이동위치배열 프로퍼티
     public List<Enemy> EnemyList => enemyList; // 적리스트 프로퍼티
@@ -28,12 +29,18 @@ public class EnemyManager : MonoBehaviour
         enemyList = new List<Enemy>();
     }
 
+    /// <summary>
+    /// 웨이브 시작
+    /// </summary>
+    /// <param name="wave">웨이브 정보</param>
     public void StartWave(Wave wave)
     {
         // 현재 웨이브 정보 전달
         currentWave = wave;
         // 현재 웨이브 최대 적 수를 현재 남은 적 수로 지정
         currentEnemyCount = currentWave.maxEnemyCount;
+        // 앵그리모드는 아닌걸로 시작
+        isAngryMode = false;
         // 코루틴 실행
         StartCoroutine(SpawnEnemy());
     }
@@ -68,6 +75,12 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemyHPSlider(enemy);
             // 생성한 적 숫자 증가
             spawnEnemyCount++;
+            // 앵그리모드가 발동된 상태면
+            if (isAngryMode)
+            {
+                // 새로 생성되는 적에게 바로 앵그리모드 적용
+                enemy.StartAngryMode();
+            }
             // 생성 시간 기다렸다가 다음 적 생성
             float waitTime;
             if (currentWave.isStatic &&
@@ -105,6 +118,17 @@ public class EnemyManager : MonoBehaviour
         }
         // 현재 적 수에서 하나 감소
         currentEnemyCount--;
+        // 웨이브정보에 있는 앵그리모드 발동 조건 검사
+        if (currentWave.angryMode == currentEnemyCount)
+        {
+            // 앵그리모드 발동
+            isAngryMode = true;
+            // 생성된 모든 적에게 앵그리모드 적용
+            foreach (var item in enemyList)
+            {
+                item.StartAngryMode();
+            }
+        }
         // 적리스트에서 지정한 적 지우기
         enemyList.Remove(enemy);
         // 적 오브젝트 삭제

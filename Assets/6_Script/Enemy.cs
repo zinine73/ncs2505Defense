@@ -45,12 +45,14 @@ public class Enemy : MonoBehaviour
         // 이동지점 배열의 인덱스 0부터 배열크기-1까지
         if (currentIndex < emi.Waypoints.Length)
         {
+            // 앵그리모드일때면 더 빠르게 움직이게
+            float fixedSpeed = anim.GetBool("ANGRY") ? moveSpeed + 2 : moveSpeed;
             // 현재위치를 frame 처리시간비율로 계산한 속도만큼 옮겨줌
             // 즉 1개의 프레임 단위로 움직임 처리
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 emi.Waypoints[currentIndex].position,
-                moveSpeed * Time.deltaTime);
+                fixedSpeed * Time.deltaTime);
             // 현재 오브젝트가 어느 방향으로 이동하는지 검사
             // MoveTowards에서 target - current 값의 x가 0보타 크냐
             Vector3 direction = emi.Waypoints[currentIndex].position 
@@ -102,5 +104,13 @@ public class Enemy : MonoBehaviour
             // 피격 애니메이션 실행
             anim.SetTrigger("HIT");
         }
+    }
+
+    /// <summary>
+    /// 이 적을 앵그리모드로 만들어서 빠르게 한다
+    /// </summary>
+    public void StartAngryMode()
+    {
+        anim.SetBool("ANGRY", true);
     }
 }

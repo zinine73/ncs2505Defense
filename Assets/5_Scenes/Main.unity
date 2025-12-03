@@ -15432,6 +15432,7 @@ MonoBehaviour:
   - isStatic: 1
     spawnTime: 1
     maxEnemyCount: 5
+    angryMode: 2
     enemyPrefabs:
     - {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
     - {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
@@ -15447,6 +15448,7 @@ MonoBehaviour:
   - isStatic: 0
     spawnTime: 0.7
     maxEnemyCount: 20
+    angryMode: 4
     enemyPrefabs:
     - {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
     - {fileID: 7941954617458334119, guid: 645584f128d91a94c84e7341e91c0609, type: 3}
@@ -15454,6 +15456,7 @@ MonoBehaviour:
   - isStatic: 1
     spawnTime: 0.5
     maxEnemyCount: 10
+    angryMode: 3
     enemyPrefabs:
     - {fileID: 1731677646757589007, guid: 24993d0205d1b0c498f7ddde9c1da9aa, type: 3}
     - {fileID: 556517937436247117, guid: 7a239aab14dc919498b8cb8c65fa34b8, type: 3}
@@ -15479,6 +15482,7 @@ MonoBehaviour:
   - isStatic: 0
     spawnTime: 1
     maxEnemyCount: 30
+    angryMode: 5
     enemyPrefabs:
     - {fileID: 1364744778495335728, guid: 5eec9ce9e9923c44a903a4addf6fb81f, type: 3}
     - {fileID: 556517937436247117, guid: 7a239aab14dc919498b8cb8c65fa34b8, type: 3}
