@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class TowerSpawner : MonoBehaviour
 {
-    [SerializeField] TowerTemplate towerTemplate; // 타워 정보
+    [SerializeField] TowerTemplate[] towerTemplate; // 타워 정보
     [SerializeField] InfoTower infoTower; // 타워 정보 패널
     [SerializeField] ToastMessage toastMsg; // 토스트 메시지
 
@@ -13,6 +13,7 @@ public class TowerSpawner : MonoBehaviour
     List<RaycastHit2D> rcList; // Raycast 결과 저장용 리스트
     bool isOnTowerButton = false; // 타워건설버튼 눌렸는지 체크
     GameObject followTowerClone = null; // 임시 타워
+    int towerType; // 타워 속성
 
     void Start()
     {
@@ -81,9 +82,9 @@ public class TowerSpawner : MonoBehaviour
         // 다시 건설버튼을 눌러서 건설하도록 설정
         isOnTowerButton = false;
         // 소지골드에서 건설비용 차감
-        PlayerManager.Instance.CurrentGold -= towerTemplate.weapon[0].cost;
+        PlayerManager.Instance.CurrentGold -= towerTemplate[towerType].weapon[0].cost;
         // 타워프리펩으로 타워 생성
-        GameObject clone = Instantiate(towerTemplate.towerPrefab, 
+        GameObject clone = Instantiate(towerTemplate[towerType].towerPrefab, 
             tileTr.position, Quaternion.identity, transform);
         // 타워 무기 초기화
         clone.GetComponent<TowerWeapon>().Init();
@@ -93,13 +94,16 @@ public class TowerSpawner : MonoBehaviour
         StopCoroutine(OnTowerCancelSystem());
     }
 
-    public void ReadyToSpawnTower()
+    public void ReadyToSpawnTower(int type)
     {
+        // 타입 지정
+        towerType = type;
+        
         // 버튼 중복해서 누르는 경우 방지
         if (isOnTowerButton) return;
 
         // 건설비용이 소지골드보다 크면 리턴
-        if (towerTemplate.weapon[0].cost > PlayerManager.Instance.CurrentGold)
+        if (towerTemplate[towerType].weapon[0].cost > PlayerManager.Instance.CurrentGold)
         {
             // 건설불가 메시지 출력
             toastMsg.ShowToast(ToastType.MoneyBuild);
@@ -109,7 +113,7 @@ public class TowerSpawner : MonoBehaviour
         // 타워건설 버튼 눌렸다고 설정
         isOnTowerButton = true;
         // 마우스를 따라다니는 임시 타워 생성
-        followTowerClone = Instantiate(towerTemplate.followTowerPrefab);
+        followTowerClone = Instantiate(towerTemplate[towerType].followTowerPrefab);
         // 타워건설 취소하는 코루틴 시작
         StartCoroutine(OnTowerCancelSystem());
     }

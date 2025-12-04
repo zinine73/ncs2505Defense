@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5673389488321787961}
   - component: {fileID: 2795863790945556428}
   m_Layer: 0
-  m_Name: TowerGun1_1
+  m_Name: TowerGun1
   m_TagString: TOWER
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,8 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerTemplate: {fileID: 11400000, guid: db25fdad368ea5149869c32b534aa21d, type: 2}
-  projectilePrefab: {fileID: 5076185702052789989, guid: bbc75b03520f1e54cabff72a3f6ec813, type: 3}
   spawnPoint: {fileID: 1321260278149356451}
+  weaponType: 0
+  projectilePrefab: {fileID: 5076185702052789989, guid: bbc75b03520f1e54cabff72a3f6ec813, type: 3}
+  lineRenderer: {fileID: 0}
 --- !u!1 &6318711103667246787
 GameObject:
   m_ObjectHideFlags: 0
