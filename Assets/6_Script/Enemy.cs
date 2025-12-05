@@ -14,10 +14,16 @@ public class Enemy : MonoBehaviour
     Animator anim; // 애니메이션 제어용 애니메이터
     SpriteRenderer spriteRenderer; // 이미지 반전용 SR
     EnemyManager emi; // 자주 사용할 인스턴스 간소화
+    float slow; // 감속해야 하는 퍼센트 수치
 
     // property
     public float MaxHP => maxHP; // 최대체력 프로퍼티
     public float CurrentHP => currentHP; // 현재체력 프로퍼티
+    public float Slow
+    {
+        get => slow;
+        set => slow = Mathf.Max(0, value); // 음수값은 받지 않도록
+    }
 
     /// <summary>
     /// 적을 생성한 후 반드시 처음에 한번 호출
@@ -36,6 +42,8 @@ public class Enemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         // 현재 체력을 최대치로 초기화
         currentHP = maxHP;
+        // 감속은 없는 상태로
+        slow = 0f;
         // 살아 있는 상태로 시작
         isDie = false;
     }
@@ -47,6 +55,8 @@ public class Enemy : MonoBehaviour
         {
             // 앵그리모드일때면 더 빠르게 움직이게
             float fixedSpeed = anim.GetBool("ANGRY") ? moveSpeed + 2 : moveSpeed;
+            // 감속타워 영향을 받으면 감속
+            fixedSpeed -= fixedSpeed * slow;
             // 현재위치를 frame 처리시간비율로 계산한 속도만큼 옮겨줌
             // 즉 1개의 프레임 단위로 움직임 처리
             transform.position = Vector3.MoveTowards(

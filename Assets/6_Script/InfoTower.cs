@@ -57,7 +57,15 @@ public class InfoTower : MonoBehaviour
         // 타워 정보 표시
         imageTower.sprite = currentTower.TowerSprite;
         textLevel.text = $"Level : {currentTower.Level}";
-        textDamage.text = $"Damage : {currentTower.Damage}";
+        // 감속타워일때는 데미지 대신 감속값을 보여준다
+        if (currentTower.WeaponType == WeaponType.Slow)
+        {
+            textDamage.text = $"Slow : {currentTower.Slow * 100}%";   
+        }
+        else
+        {
+            textDamage.text = $"Damage : {currentTower.Damage}";
+        }
         textRate.text = $"Rate : {currentTower.Rate}";
         textRange.text = $"Range : {currentTower.Range}";
         textBtnUpgrade.text = $"Upgrade:\n{currentTower.CostUpgrade}";

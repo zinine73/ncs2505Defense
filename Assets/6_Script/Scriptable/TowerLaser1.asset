@@ -13,22 +13,25 @@ MonoBehaviour:
   m_Name: TowerLaser1
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 185652955915825848, guid: 214e3b99bbd54ee45be18f21e537b6ce, type: 3}
-  followTowerPrefab: {fileID: 1421229844954674595, guid: 5d165c5dc018b7146b621bf0a97427af, type: 3}
+  followTowerPrefab: {fileID: 1421229844954674595, guid: a50afdda01195914fac3443de3c6758f, type: 3}
   weapon:
   - sprite: {fileID: 21300000, guid: 2bc00890e43bf744e85158a46d02a1d2, type: 3}
     damage: 1.5
+    slow: 0
     rate: 0
     range: 3
     cost: 200
     sell: 100
   - sprite: {fileID: 21300000, guid: 32d5c1ae67ed389458058a1439c0f507, type: 3}
     damage: 3
+    slow: 0
     rate: 0
     range: 3
     cost: 350
     sell: 150
   - sprite: {fileID: 21300000, guid: 7c765ae46a6ca294ba73ce56a28e7a14, type: 3}
     damage: 5
+    slow: 0
     rate: 0
     range: 5
     cost: 400
